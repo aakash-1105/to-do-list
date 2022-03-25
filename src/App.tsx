@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import { type } from '@testing-library/user-event/dist/type';
+import React, { useState } from 'react';
 import './App.css';
+import AddToList from './Components/AddToList';
+import List from './Components/List';
 
-function App() {
+export interface IState {
+   people:
+   { 
+    name: string;
+    url: string;
+    age: number;
+    note?: string;
+  }[]
+}
+const App: React.FC = () => {
+  const [people , setPeople] = useState<IState["people"]>([
+    {
+      name : "Virat Kohli",
+      url : "https://www.gettyimages.in/photos/virat-kohli",
+      age : 32,
+      note : "Best Cricketer"
+    }
+  ])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>People Invited</h1>
+      <List people = {people}/>
+      <AddToList people ={people} setPeople={setPeople}/>
     </div>
   );
 }
